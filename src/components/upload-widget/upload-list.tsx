@@ -2,7 +2,7 @@ import { useUploads } from '../../store/uploads'
 import { UploadWidgetUploadItem } from './upload-item'
 
 export function UploadWidgetUploadList() {
-  const { uploads } = useUploads()
+  const uploads = useUploads(store => store.uploads)
 
   const isUploadListEmpty = !uploads.size
 
@@ -17,7 +17,11 @@ export function UploadWidgetUploadList() {
       ) : (
         <div className="space-y-2">
           {[...uploads].map(([uploadId, upload]) => (
-            <UploadWidgetUploadItem key={uploadId} upload={upload} />
+            <UploadWidgetUploadItem
+              key={uploadId}
+              upload={upload}
+              uploadId={uploadId}
+            />
           ))}
         </div>
       )}
